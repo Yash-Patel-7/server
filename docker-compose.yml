@@ -1,8 +1,10 @@
 version: '3'
 services:
   server:
-    container_name: "server"
+    image: "server:1.0.0"
     build: .
+    container_name: "server"
+    restart: "always"
     ports:
       - "4000:4000"
     env_file:
