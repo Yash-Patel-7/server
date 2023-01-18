@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>Seal Guardian</title>
+</head>
+<body>
+
+<p>Click on the "Browse..." button to select a file to upload:</p>
+
+<form id="data">
+    <label> File Password
+        <input type="text" name="filePassword" value="hi123">
+    </label>
+    <label> File Name
+        <input type="text" name="fileName" value="hello">
+    </label>
+    <input type="file" name="file">
+    <button type="button" id="btn" style="height: 25px; width: 100px;">Upload</button>
+</form>
+
+</body>
+<script>
+    document.getElementById("btn").addEventListener('click', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "https://localhost:4000/api/v1/fileLink/create",
+            type: 'POST',
+            data: new FormData(document.getElementById('data')),
+            headers: {
+                "authorization": "bearer 59c878722a5573208e3096e98f02d3b0eab86b99da",
+                "total-file-size-bytes": 58858521
+            },
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: (data) => {
+                alert(JSON.stringify(data, null, 2));
+            },
+            fail: (data) => {
+                alert(JSON.stringify(data, null, 2));
+            },
+            error: (err) => {
+                alert(JSON.stringify(err["responseJSON"], null, 2));
+            }
+        });
+    });
+</script>
+</html>
+
